@@ -2,13 +2,26 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/listContributorsFragment">
 
     <fragment
         android:id="@+id/listContributorsFragment"
         android:name="com.example.contributorsapp.ui.listContributors.ListContributorsFragment"
+        tools:layout="@layout/fragment_list_contributors">
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@+id/detailContributorsFragment"
+            />
+    </fragment>
 
-        />
+    <fragment
+        android:id="@+id/detailContributorsFragment"
+        android:name="com.example.contributorsapp.ui.detailContributors.DetailContributorsFragment"
+        tools:layout="@layout/fragment_detail_contributors">
+
+    </fragment>
+
 
 </navigation>
