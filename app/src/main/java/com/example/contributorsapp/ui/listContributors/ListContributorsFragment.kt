@@ -5,18 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.contributorsapp.R
+import com.example.contributorsapp.databinding.FragmentListContributorsBinding
 
 
 class ListContributorsFragment : Fragment() {
+    private lateinit var binding: FragmentListContributorsBinding
+    private val listContributorsViewModel = ListContributorsViewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_list_contributors, container, false)
+        binding = FragmentListContributorsBinding.inflate(inflater, container, false)
 
-        view.button.setOnClickListener(){
+        binding.button.setOnClickListener(){
             findNavController().navigate(R.id.action_list_to_detail)
         }
-        return view
+        return binding.root
     }
 
 }
