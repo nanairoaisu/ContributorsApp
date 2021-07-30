@@ -2,8 +2,10 @@ package com.example.contributorsapp.ui.listContributors
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.contributorsapp.model.ContributorsData
 import com.example.contributorsapp.model.ContributorsRepository
 import com.example.contributorsapp.model.room.AppDatabase
 import kotlinx.coroutines.launch
@@ -12,6 +14,7 @@ class ListContributorsViewModel(): ViewModel() {
 //    private val contributorsDao = AppDatabase.getDatabase(context).contributorsDao()
 //    private val contributorsRepository = ContributorsRepository(contributorsDao)
 
+    var contributorsList: MutableLiveData<List<ContributorsData>> = MutableLiveData(listOf())
     private val contributorsRepository = ContributorsRepository()
 
     fun fetchContributorsList(){
@@ -19,15 +22,14 @@ class ListContributorsViewModel(): ViewModel() {
 
         viewModelScope.launch {
             Log.v("banana","ここまできた")
-            val contributorsList = contributorsRepository.fetchContributorsList()
-            Log.v("banana",contributorsList[0].toString())
+            contributorsList.postValue(contributorsRepository.fetchContributorsList())
 //            contributorsRepository.insertContributorsList(contributorsList.toTypedArray())
         }
+
     }
 
-//    fun getContributorsList(){
-//        viewModelScope.launch {
-//
-//        }
-//    }
+    fun setContributorsList(): List<ContributorsData>? {
+        return contributorsList.value
+    }
+
 }
