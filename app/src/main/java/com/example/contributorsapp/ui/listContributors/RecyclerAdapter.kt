@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contributorsapp.R
-import com.example.contributorsapp.databinding.FragmentListContributorsBinding
 import com.example.contributorsapp.databinding.ListContributorBinding
 import com.example.contributorsapp.model.ContributorsData
 

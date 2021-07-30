@@ -1,13 +1,11 @@
 package com.example.contributorsapp.ui.listContributors
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contributorsapp.model.ContributorsData
 import com.example.contributorsapp.model.ContributorsRepository
-import com.example.contributorsapp.model.room.AppDatabase
 import kotlinx.coroutines.launch
 
 class ListContributorsViewModel(): ViewModel() {
