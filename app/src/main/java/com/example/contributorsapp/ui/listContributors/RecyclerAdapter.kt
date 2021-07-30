@@ -1,6 +1,7 @@
 package com.example.contributorsapp.ui.listContributors
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,17 @@ import com.example.contributorsapp.model.ContributorsData
 class RecyclerAdapter(private var data: List<ContributorsData>): RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
 
     class RecyclerViewHolder(val binding: ListContributorBinding): RecyclerView.ViewHolder(binding.root)
+
+    //クリックイベントの追加
+    lateinit var listener: OnItemClickListener
+
+    interface OnItemClickListener{
+        fun onItemClickListener(view: View, position: Int, clickedContributor: ContributorsData)
+    }
+
+    fun setOnClickListener(listener: OnItemClickListener){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -23,6 +35,9 @@ class RecyclerAdapter(private var data: List<ContributorsData>): RecyclerView.Ad
         val contributor = data[position]
         holder.binding.viewModel = ContributorsData(contributor.id, contributor.login, contributor.contributions, contributor.url)
 
+        holder.binding.layoutList.setOnClickListener {
+            listener.onItemClickListener(it, position, contributor)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -33,5 +48,7 @@ class RecyclerAdapter(private var data: List<ContributorsData>): RecyclerView.Ad
         this.data = contributor
         notifyDataSetChanged()
     }
+
+
 
 }
