@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Contributors App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_contribution_item_name">contributions:</string>
+    <string name="tv_followers_item_name">followers</string>
+    <string name="tv_following_item_name">following:</string>
 </resources>

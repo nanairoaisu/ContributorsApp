@@ -18,10 +18,7 @@ class DetailContributorsViewModel: ViewModel() {
     }
 
     fun fetchDetail(){
-        Log.v("banana","関数だぁ")
-
         viewModelScope.launch {
-            Log.v("banana","ここまできた")
             detail.postValue(repository.fetchUserDetail(login))
         }
     }

@@ -16,8 +16,11 @@ class DetailContributorsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDetailContributorsBinding.inflate(inflater, container, false)
 
-        detailContributorsViewModel.setLogin(args.login)
+        binding.lifecycleOwner = this
+        binding.viewModel = detailContributorsViewModel
 
+        detailContributorsViewModel.setLogin(args.login)
+        detailContributorsViewModel.fetchDetail()
 
         return binding.root
     }
