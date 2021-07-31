@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contributorsapp.model.ContributorsData
-import com.example.contributorsapp.model.ContributorsRepository
+import com.example.contributorsapp.model.Repository
 import kotlinx.coroutines.launch
 
 class ListContributorsViewModel(): ViewModel() {
@@ -13,21 +13,13 @@ class ListContributorsViewModel(): ViewModel() {
 //    private val contributorsRepository = ContributorsRepository(contributorsDao)
 
     var contributorsList: MutableLiveData<List<ContributorsData>> = MutableLiveData(listOf())
-    private val contributorsRepository = ContributorsRepository()
+    private val repository = Repository()
 
     fun fetchContributorsList(){
-        Log.v("banana","関数だぁ")
-
         viewModelScope.launch {
-            Log.v("banana","ここまできた")
-            contributorsList.postValue(contributorsRepository.fetchContributorsList())
+            contributorsList.postValue(repository.fetchContributorsList())
 //            contributorsRepository.insertContributorsList(contributorsList.toTypedArray())
         }
-
-    }
-
-    fun setContributorsList(): List<ContributorsData>? {
-        return contributorsList.value
     }
 
 }

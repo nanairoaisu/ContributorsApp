@@ -1,6 +1,5 @@
 package com.example.contributorsapp.model
 
-import android.util.Log
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
@@ -9,18 +8,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 //class ContributorsRepository(private val contributorsDao: ContributorsDao) {
-class ContributorsRepository() {
+class Repository() {
     val gson = GsonBuilder()
         .serializeNulls()
         .create()
 
-    val URL = "https://api.github.com/repositories/90792131/"
+    val URL = "https://api.github.com/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    private val service = retrofit.create(Interface.CreateContributorsService::class.java)
+    private val service = retrofit.create(Interface.CreateService::class.java)
 
     suspend fun fetchContributorsList(): List<ContributorsData>{
         var contributorList: List<ContributorsData> = listOf()
@@ -36,6 +35,23 @@ class ContributorsRepository() {
             }
         }
         return contributorList
+    }
+
+    suspend fun fetchUserDetail(login: String): DetailData{
+        var detail = DetailData(0, "null", "null", "null", "null", 0, 0)
+
+        withContext(IO){
+            try{
+                val response = service.fetchDetail(login).execute().body()
+                if(response != null){
+                    detail = response
+                }
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }
+
+        return detail
     }
 
 //    suspend fun insertContributorsList(

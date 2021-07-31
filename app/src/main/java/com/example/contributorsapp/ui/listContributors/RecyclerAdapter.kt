@@ -14,7 +14,7 @@ class RecyclerAdapter(private var data: List<ContributorsData>): RecyclerView.Ad
     class RecyclerViewHolder(val binding: ListContributorBinding): RecyclerView.ViewHolder(binding.root)
 
     //クリックイベントの追加
-    lateinit var listener: OnItemClickListener
+    private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener{
         fun onItemClickListener(view: View, position: Int, clickedContributor: ContributorsData)
@@ -33,7 +33,7 @@ class RecyclerAdapter(private var data: List<ContributorsData>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val contributor = data[position]
-        holder.binding.viewModel = ContributorsData(contributor.id, contributor.login, contributor.contributions, contributor.url)
+        holder.binding.viewModel = ContributorsData(contributor.id, contributor.login, contributor.contributions, contributor.avatar_url)
 
         holder.binding.layoutList.setOnClickListener {
             listener.onItemClickListener(it, position, contributor)

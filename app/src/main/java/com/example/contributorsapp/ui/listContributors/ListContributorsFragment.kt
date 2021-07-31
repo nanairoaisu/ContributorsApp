@@ -28,7 +28,7 @@ class ListContributorsFragment : Fragment() {
         val layout = LinearLayoutManager(context)
         binding.lvContributor.layoutManager = layout
         binding.viewModel = listContributorsViewModel
-        adapter = RecyclerAdapter(listContributorsViewModel.setContributorsList()?: listOf())
+        adapter = RecyclerAdapter(listContributorsViewModel.contributorsList.value?: listOf())
         binding.lvContributor.adapter = adapter
 
         listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
@@ -50,7 +50,9 @@ class ListContributorsFragment : Fragment() {
                     position: Int,
                     clickedContributor: ContributorsData
                 ) {
-                    findNavController().navigate(R.id.action_list_to_detail)
+                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login?: ""
+                    val action = ListContributorsFragmentDirections.actionListToDetail(login)
+                    findNavController().navigate(action)
                 }
             }
         )
