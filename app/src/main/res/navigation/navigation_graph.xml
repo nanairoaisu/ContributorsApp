@@ -23,7 +23,9 @@
         android:name="com.example.contributorsapp.ui.detailContributors.DetailContributorsFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail_contributors">
-
+        <argument
+            android:name="login"
+            app:argType="string"/>
     </fragment>
 
 
