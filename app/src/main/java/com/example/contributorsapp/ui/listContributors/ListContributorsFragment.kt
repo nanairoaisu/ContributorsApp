@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contributorsapp.R
 import com.example.contributorsapp.databinding.FragmentListContributorsBinding
@@ -25,11 +26,14 @@ class ListContributorsFragment : Fragment() {
 
         listContributorsViewModel.fetchContributorsList()
 
+        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+        binding.lvContributor.addItemDecoration(dividerItemDecoration)
         val layout = LinearLayoutManager(context)
         binding.lvContributor.layoutManager = layout
         binding.viewModel = listContributorsViewModel
         adapter = RecyclerAdapter(listContributorsViewModel.contributorsList.value?: listOf())
         binding.lvContributor.adapter = adapter
+
 
         listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
             adapter = binding.lvContributor.adapter as RecyclerAdapter
@@ -56,10 +60,6 @@ class ListContributorsFragment : Fragment() {
                 }
             }
         )
-
-
-
     }
-
 }
 
