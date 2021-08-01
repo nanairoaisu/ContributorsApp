@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.contributorsapp.R
 import com.example.contributorsapp.databinding.FragmentListContributorsBinding
 import com.example.contributorsapp.model.ContributorsData
 
@@ -18,32 +18,36 @@ class ListContributorsFragment : Fragment() {
     //private val listContributorsViewModel = this.context?.let { ListContributorsViewModel(it) }
     private val listContributorsViewModel = ListContributorsViewModel()
 
-    private lateinit var adapter: RecyclerAdapter
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListContributorsBinding.inflate(inflater, container, false)
 
         listContributorsViewModel.fetchContributorsList()
-
-        val layout = LinearLayoutManager(context)
-        binding.lvContributor.layoutManager = layout
-        binding.viewModel = listContributorsViewModel
-        adapter = RecyclerAdapter(listContributorsViewModel.contributorsList.value?: listOf())
-        binding.lvContributor.adapter = adapter
-
-        listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
-            adapter = binding.lvContributor.adapter as RecyclerAdapter
-            adapter.setContributors(it)
-
-        })
-
+        showAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter.setOnClickListener(
+        showAdapter()
+    }
+
+    private fun showAdapter(){
+        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+        binding.lvContributor.addItemDecoration(dividerItemDecoration)
+        val layout = LinearLayoutManager(context)
+        binding.lvContributor.layoutManager = layout
+        binding.viewModel = listContributorsViewModel
+        var adapter = activity?.let{RecyclerAdapter(it,listContributorsViewModel.contributorsList.value?: listOf())}
+        binding.lvContributor.adapter = adapter
+
+        listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
+            adapter = binding.lvContributor.adapter as RecyclerAdapter
+            adapter?.setContributors(it)
+
+        })
+
+        adapter?.setOnClickListener(
             object: RecyclerAdapter.OnItemClickListener{
                 override fun onItemClickListener(
                     view: View,
@@ -58,8 +62,6 @@ class ListContributorsFragment : Fragment() {
         )
 
 
-
     }
-
 }
 
