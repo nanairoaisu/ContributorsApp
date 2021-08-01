@@ -7,5 +7,7 @@ data class DetailData(
     val avatar_url: String,
     val html_url: String,
     val followers: Int,
-    val following: Int
+    val following: Int,
+    val public_repos: Int,
+    val repos_url: String
 )

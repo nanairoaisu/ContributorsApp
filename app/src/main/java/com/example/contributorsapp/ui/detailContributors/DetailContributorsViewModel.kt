@@ -9,7 +9,7 @@ import com.example.contributorsapp.model.Repository
 import kotlinx.coroutines.launch
 
 class DetailContributorsViewModel: ViewModel() {
-    var detail: MutableLiveData<DetailData> = MutableLiveData(DetailData(0, "null", "null", "null", "null", 0, 0))
+    var detail: MutableLiveData<DetailData> = MutableLiveData(DetailData(0, "null", "null", "null", "null", 0, 0,0,""))
     private val repository = Repository()
     private var login = ""
 

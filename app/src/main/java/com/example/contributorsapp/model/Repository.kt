@@ -38,7 +38,7 @@ class Repository() {
     }
 
     suspend fun fetchUserDetail(login: String): DetailData{
-        var detail = DetailData(0, "null", "null", "null", "null", 0, 0)
+        var detail = DetailData(0, "null", "null", "null", "null", 0, 0, 0, "")
 
         withContext(IO){
             try{

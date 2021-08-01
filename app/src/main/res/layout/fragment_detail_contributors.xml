@@ -16,25 +16,35 @@
         android:layout_height="match_parent"
         tools:context=".ui.detailContributors.DetailContributorsFragment">
 
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.detail.component2()}"
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{viewModel.detail.component2()}"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivIcon" />
+
+        <TextView
             android:id="@+id/tvLogin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.detail.component3()}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/ivIcon"
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
 
@@ -42,11 +52,10 @@
             android:id="@+id/tvFollowerItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
             android:text="@string/tv_followers_item_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+            app:layout_constraintStart_toEndOf="@+id/tvRepoNum"
+            app:layout_constraintTop_toTopOf="@+id/tvRepoItem" />
 
         <TextView
             android:id="@+id/tvFollowerNum"
@@ -54,19 +63,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{Integer.toString(viewModel.detail.component6())}"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvFollowerItem"
-            app:layout_constraintStart_toEndOf="@+id/tvFollowerItem"
-            app:layout_constraintTop_toTopOf="@+id/tvFollowerItem" />
+            app:layout_constraintStart_toEndOf="@+id/tvFollowerItem" />
 
         <TextView
             android:id="@+id/tvFollowingItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
             android:text="@string/tv_following_item_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFollowerItem" />
+            app:layout_constraintStart_toEndOf="@+id/tvFollowerNum"
+            app:layout_constraintTop_toTopOf="@+id/tvFollowerItem" />
 
         <TextView
             android:id="@+id/tvFollowingNum"
@@ -74,8 +82,29 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{Integer.toString(viewModel.detail.component7())}"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvFollowingItem"
-            app:layout_constraintStart_toEndOf="@+id/tvFollowingItem"
-            app:layout_constraintTop_toTopOf="@+id/tvFollowingItem" />
+            app:layout_constraintStart_toEndOf="@+id/tvFollowingItem" />
+
+        <TextView
+            android:id="@+id/tvRepoItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_public_repo_item_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivIcon" />
+
+        <TextView
+            android:id="@+id/tvRepoNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{Integer.toString(viewModel.detail.component8())}"
+
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRepoItem"
+            app:layout_constraintStart_toEndOf="@+id/tvRepoItem" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
