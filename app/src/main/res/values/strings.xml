@@ -4,4 +4,5 @@
     <string name="tv_followers_item_name">followers:</string>
     <string name="tv_following_item_name">following:</string>
     <string name="tv_public_repo_item_name">Repositories:</string>
+    <string name="bt_browser_access">ブラウザで開く</string>
 </resources>

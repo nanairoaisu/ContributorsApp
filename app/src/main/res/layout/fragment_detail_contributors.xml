@@ -106,5 +106,18 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tvRepoItem"
             app:layout_constraintStart_toEndOf="@+id/tvRepoItem" />
+
+        <Button
+            android:id="@+id/btBrowser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/bt_browser_access"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRepoItem" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,7 @@
 package com.example.contributorsapp.ui.detailContributors
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ class DetailContributorsFragment : Fragment() {
     private lateinit var binding: FragmentDetailContributorsBinding
     private val detailContributorsViewModel = DetailContributorsViewModel()
     private val args: DetailContributorsFragmentArgs by navArgs()
+    private lateinit var intent: Intent
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDetailContributorsBinding.inflate(inflater, container, false)
@@ -34,10 +37,23 @@ class DetailContributorsFragment : Fragment() {
                     .transition(DrawableTransitionOptions.withCrossFade()) // default is 300
                     .into(binding.ivIcon)
             }
+
+            val uri = Uri.parse(newDetail.html_url)
+            intent = Intent(Intent.ACTION_VIEW,uri)
+
         }
 
         detailContributorsViewModel.detail.observe(viewLifecycleOwner,detailObserver)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btBrowser.setOnClickListener{
+            startActivity(intent)
+        }
+
     }
 }
