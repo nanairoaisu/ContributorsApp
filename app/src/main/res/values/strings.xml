@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Contributors App</string>
     <string name="tv_contribution_item_name">contributions:</string>
-    <string name="tv_followers_item_name">followers:</string>
-    <string name="tv_following_item_name">following:</string>
+    <string name="tv_followers_item_name">Followers:</string>
+    <string name="tv_following_item_name">Following:</string>
     <string name="tv_public_repo_item_name">Repositories:</string>
     <string name="bt_browser_access">ブラウザで開く</string>
 </resources>

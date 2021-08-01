@@ -20,7 +20,7 @@ class DetailContributorsFragment : Fragment() {
     private val args: DetailContributorsFragmentArgs by navArgs()
     private lateinit var intent: Intent
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDetailContributorsBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
