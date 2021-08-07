@@ -1,6 +1,6 @@
 package com.example.contributorsapp.model
 
-data class ContributorsData(
+data class ContributorData(
     val id: Int,
     val login: String,
     val contributions: Int,

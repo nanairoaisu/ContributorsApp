@@ -10,17 +10,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.contributorsapp.R
 import com.example.contributorsapp.databinding.ListContributorBinding
-import com.example.contributorsapp.model.ContributorsData
+import com.example.contributorsapp.model.ContributorData
 
-class RecyclerAdapter(val context: Context, private var data: List<ContributorsData>) : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
+class ContributorListAdapter(val context: Context, private var data: List<ContributorData>) : RecyclerView.Adapter<ContributorListAdapter.RecyclerViewHolder>() {
 
     class RecyclerViewHolder(val binding: ListContributorBinding) : RecyclerView.ViewHolder(binding.root)
 
-    //クリックイベントの追加
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onItemClickListener(view: View, position: Int, clickedContributor: ContributorsData)
+        fun onItemClickListener(view: View, position: Int, clickedContributor: ContributorData)
     }
 
     fun setOnClickListener(listener: OnItemClickListener) {
@@ -37,7 +36,7 @@ class RecyclerAdapter(val context: Context, private var data: List<ContributorsD
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val contributor = data[position]
-        holder.binding.viewModel = ContributorsData(
+        holder.binding.viewModel = ContributorData(
             contributor.id,
             contributor.login,
             contributor.contributions,
@@ -59,7 +58,7 @@ class RecyclerAdapter(val context: Context, private var data: List<ContributorsD
         return data.size
     }
 
-    fun setContributors(contributor: List<ContributorsData>) {
+    fun setContributors(contributor: List<ContributorData>) {
         this.data = contributor
         notifyDataSetChanged()
     }

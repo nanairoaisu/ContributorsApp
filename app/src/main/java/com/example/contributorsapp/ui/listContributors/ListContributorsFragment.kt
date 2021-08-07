@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contributorsapp.databinding.FragmentListContributorsBinding
-import com.example.contributorsapp.model.ContributorsData
+import com.example.contributorsapp.model.ContributorData
 
 
 class ListContributorsFragment : Fragment() {
@@ -41,7 +41,7 @@ class ListContributorsFragment : Fragment() {
         binding.lvContributor.layoutManager = layout
         binding.viewModel = listContributorsViewModel
         var adapter = activity?.let {
-            RecyclerAdapter(
+            ContributorListAdapter(
                 it,
                 listContributorsViewModel.contributorsList.value ?: listOf()
             )
@@ -49,17 +49,17 @@ class ListContributorsFragment : Fragment() {
         binding.lvContributor.adapter = adapter
 
         listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
-            adapter = binding.lvContributor.adapter as RecyclerAdapter
+            adapter = binding.lvContributor.adapter as ContributorListAdapter
             adapter?.setContributors(it)
 
         })
 
         adapter?.setOnClickListener(
-            object : RecyclerAdapter.OnItemClickListener {
+            object : ContributorListAdapter.OnItemClickListener {
                 override fun onItemClickListener(
                     view: View,
                     position: Int,
-                    clickedContributor: ContributorsData
+                    clickedContributor: ContributorData
                 ) {
                     val login = listContributorsViewModel.contributorsList.value?.get(position)?.login ?: ""
                     val action = ListContributorsFragmentDirections.actionListToDetail(login)

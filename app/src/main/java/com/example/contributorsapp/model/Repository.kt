@@ -19,10 +19,10 @@ class Repository() {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-    private val service = retrofit.create(Interface.CreateService::class.java)
+    private val service = retrofit.create(IContributorApi::class.java)
 
-    suspend fun fetchContributorsList(): List<ContributorsData> {
-        var contributorList: List<ContributorsData> = listOf()
+    suspend fun fetchContributorsList(): List<ContributorData> {
+        var contributorList: List<ContributorData> = listOf()
 
         withContext(IO) {
             try {
