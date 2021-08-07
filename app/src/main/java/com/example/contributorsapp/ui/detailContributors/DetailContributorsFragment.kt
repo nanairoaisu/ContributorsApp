@@ -29,8 +29,8 @@ class DetailContributorsFragment : Fragment() {
         detailContributorsViewModel.setLogin(args.login)
         detailContributorsViewModel.fetchDetail()
 
-        val detailObserver = Observer<DetailData>{ newDetail ->
-            context?.let{
+        val detailObserver = Observer<DetailData> { newDetail ->
+            context?.let {
                 Glide.with(it)
                     .load(newDetail.avatar_url)
                     .circleCrop()
@@ -39,11 +39,11 @@ class DetailContributorsFragment : Fragment() {
             }
 
             val uri = Uri.parse(newDetail.html_url)
-            intent = Intent(Intent.ACTION_VIEW,uri)
+            intent = Intent(Intent.ACTION_VIEW, uri)
 
         }
 
-        detailContributorsViewModel.detail.observe(viewLifecycleOwner,detailObserver)
+        detailContributorsViewModel.detail.observe(viewLifecycleOwner, detailObserver)
 
         return binding.root
     }
@@ -51,7 +51,7 @@ class DetailContributorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btBrowser.setOnClickListener{
+        binding.btBrowser.setOnClickListener {
             startActivity(intent)
         }
 

@@ -15,6 +15,7 @@ import com.example.contributorsapp.model.ContributorsData
 
 class ListContributorsFragment : Fragment() {
     private lateinit var binding: FragmentListContributorsBinding
+
     //private val listContributorsViewModel = this.context?.let { ListContributorsViewModel(it) }
     private val listContributorsViewModel = ListContributorsViewModel()
 
@@ -32,13 +33,19 @@ class ListContributorsFragment : Fragment() {
         showAdapter()
     }
 
-    private fun showAdapter(){
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+    private fun showAdapter() {
+        val dividerItemDecoration =
+            DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         binding.lvContributor.addItemDecoration(dividerItemDecoration)
         val layout = LinearLayoutManager(context)
         binding.lvContributor.layoutManager = layout
         binding.viewModel = listContributorsViewModel
-        var adapter = activity?.let{RecyclerAdapter(it,listContributorsViewModel.contributorsList.value?: listOf())}
+        var adapter = activity?.let {
+            RecyclerAdapter(
+                it,
+                listContributorsViewModel.contributorsList.value ?: listOf()
+            )
+        }
         binding.lvContributor.adapter = adapter
 
         listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
@@ -48,15 +55,16 @@ class ListContributorsFragment : Fragment() {
         })
 
         adapter?.setOnClickListener(
-            object: RecyclerAdapter.OnItemClickListener{
+            object : RecyclerAdapter.OnItemClickListener {
                 override fun onItemClickListener(
                     view: View,
                     position: Int,
                     clickedContributor: ContributorsData
                 ) {
-                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login?: ""
+                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login ?: ""
                     val action = ListContributorsFragmentDirections.actionListToDetail(login)
                     findNavController().navigate(action)
+
                 }
             }
         )
