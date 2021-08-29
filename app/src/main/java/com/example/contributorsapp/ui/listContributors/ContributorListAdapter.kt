@@ -12,9 +12,11 @@ import com.example.contributorsapp.R
 import com.example.contributorsapp.databinding.ListContributorBinding
 import com.example.contributorsapp.model.ContributorData
 
-class ContributorListAdapter(val context: Context, private var data: List<ContributorData>) : RecyclerView.Adapter<ContributorListAdapter.RecyclerViewHolder>() {
+class ContributorListAdapter(private var data: List<ContributorData>) :
+    RecyclerView.Adapter<ContributorListAdapter.RecyclerViewHolder>() {
 
-    class RecyclerViewHolder(val binding: ListContributorBinding) : RecyclerView.ViewHolder(binding.root)
+    class RecyclerViewHolder(val binding: ListContributorBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private lateinit var listener: OnItemClickListener
 
@@ -43,7 +45,7 @@ class ContributorListAdapter(val context: Context, private var data: List<Contri
             contributor.avatar_url
         )
 
-        Glide.with(context)
+        Glide.with(holder.itemView.context)
             .load(contributor.avatar_url)
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade()) // default is 300

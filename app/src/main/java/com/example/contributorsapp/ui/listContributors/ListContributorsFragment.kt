@@ -15,11 +15,16 @@ import com.example.contributorsapp.model.ContributorData
 
 class ListContributorsFragment : Fragment() {
     private lateinit var binding: FragmentListContributorsBinding
+    private var adapter = ContributorListAdapter(listOf())
 
     //private val listContributorsViewModel = this.context?.let { ListContributorsViewModel(it) }
     private val listContributorsViewModel = ListContributorsViewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentListContributorsBinding.inflate(inflater, container, false)
 
         listContributorsViewModel.fetchContributorsList()
@@ -30,38 +35,15 @@ class ListContributorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showAdapter()
-    }
-
-    private fun showAdapter() {
-        val dividerItemDecoration =
-            DividerItemDecoration(context, LinearLayoutManager(context).orientation)
-        binding.lvContributor.addItemDecoration(dividerItemDecoration)
-        val layout = LinearLayoutManager(context)
-        binding.lvContributor.layoutManager = layout
-        binding.viewModel = listContributorsViewModel
-        var adapter = activity?.let {
-            ContributorListAdapter(
-                it,
-                listContributorsViewModel.contributorsList.value ?: listOf()
-            )
-        }
-        binding.lvContributor.adapter = adapter
-
-        listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
-            adapter = binding.lvContributor.adapter as ContributorListAdapter
-            adapter?.setContributors(it)
-
-        })
-
-        adapter?.setOnClickListener(
+        adapter.setOnClickListener(
             object : ContributorListAdapter.OnItemClickListener {
                 override fun onItemClickListener(
                     view: View,
                     position: Int,
                     clickedContributor: ContributorData
                 ) {
-                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login ?: ""
+                    val login =
+                        listContributorsViewModel.contributorsList.value?.get(position)?.login ?: ""
                     val action = ListContributorsFragmentDirections.actionListToDetail(login)
                     findNavController().navigate(action)
 
@@ -69,7 +51,27 @@ class ListContributorsFragment : Fragment() {
             }
         )
 
+    }
 
+    private fun showAdapter() {
+        val dividerItemDecoration =
+            DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+        val layout = LinearLayoutManager(context)
+
+        binding.let {
+            it.lvContributor.addItemDecoration(dividerItemDecoration)
+            it.lvContributor.layoutManager = layout
+            it.viewModel = listContributorsViewModel
+            adapter =
+                ContributorListAdapter(listContributorsViewModel.contributorsList.value ?: listOf())
+            it.lvContributor.adapter = adapter
+        }
+
+        listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
+            //adapter = binding.lvContributor.adapter as ContributorListAdapter
+            adapter.setContributors(it)
+
+        })
     }
 }
 
