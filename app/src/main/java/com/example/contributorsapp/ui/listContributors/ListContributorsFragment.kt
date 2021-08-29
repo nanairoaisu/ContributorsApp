@@ -10,11 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contributorsapp.databinding.FragmentListContributorsBinding
-import com.example.contributorsapp.model.ContributorsData
+import com.example.contributorsapp.model.ContributorData
 
 
 class ListContributorsFragment : Fragment() {
     private lateinit var binding: FragmentListContributorsBinding
+
     //private val listContributorsViewModel = this.context?.let { ListContributorsViewModel(it) }
     private val listContributorsViewModel = ListContributorsViewModel()
 
@@ -32,31 +33,38 @@ class ListContributorsFragment : Fragment() {
         showAdapter()
     }
 
-    private fun showAdapter(){
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+    private fun showAdapter() {
+        val dividerItemDecoration =
+            DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         binding.lvContributor.addItemDecoration(dividerItemDecoration)
         val layout = LinearLayoutManager(context)
         binding.lvContributor.layoutManager = layout
         binding.viewModel = listContributorsViewModel
-        var adapter = activity?.let{RecyclerAdapter(it,listContributorsViewModel.contributorsList.value?: listOf())}
+        var adapter = activity?.let {
+            ContributorListAdapter(
+                it,
+                listContributorsViewModel.contributorsList.value ?: listOf()
+            )
+        }
         binding.lvContributor.adapter = adapter
 
         listContributorsViewModel.contributorsList.observe(viewLifecycleOwner, Observer {
-            adapter = binding.lvContributor.adapter as RecyclerAdapter
+            adapter = binding.lvContributor.adapter as ContributorListAdapter
             adapter?.setContributors(it)
 
         })
 
         adapter?.setOnClickListener(
-            object: RecyclerAdapter.OnItemClickListener{
+            object : ContributorListAdapter.OnItemClickListener {
                 override fun onItemClickListener(
                     view: View,
                     position: Int,
-                    clickedContributor: ContributorsData
+                    clickedContributor: ContributorData
                 ) {
-                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login?: ""
+                    val login = listContributorsViewModel.contributorsList.value?.get(position)?.login ?: ""
                     val action = ListContributorsFragmentDirections.actionListToDetail(login)
                     findNavController().navigate(action)
+
                 }
             }
         )

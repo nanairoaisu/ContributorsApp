@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.contributorsapp.model.ContributorsData" />
+            type="com.example.contributorsapp.model.ContributorData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
