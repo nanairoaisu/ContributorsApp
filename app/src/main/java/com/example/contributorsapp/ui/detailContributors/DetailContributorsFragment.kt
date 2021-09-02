@@ -20,11 +20,17 @@ class DetailContributorsFragment : Fragment() {
     private val args: DetailContributorsFragmentArgs by navArgs()
     private lateinit var intent: Intent
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentDetailContributorsBinding.inflate(inflater, container, false)
 
-        binding.lifecycleOwner = this
-        binding.viewModel = detailContributorsViewModel
+        binding.let {
+            it.lifecycleOwner = viewLifecycleOwner
+            it.viewModel = detailContributorsViewModel
+        }
 
         detailContributorsViewModel.setLogin(args.login)
         detailContributorsViewModel.fetchDetail()
@@ -47,6 +53,7 @@ class DetailContributorsFragment : Fragment() {
 
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
