@@ -12,7 +12,8 @@ class ListContributorsViewModel() : ViewModel() {
 //    private val contributorsDao = AppDatabase.getDatabase(context).contributorsDao()
 //    private val contributorsRepository = ContributorsRepository(contributorsDao)
 
-    private val _contributorsList: MutableLiveData<List<ContributorData>> = MutableLiveData(listOf())
+    private val _contributorsList: MutableLiveData<List<ContributorData>> =
+        MutableLiveData(listOf())
     val contributorsList: LiveData<List<ContributorData>> = _contributorsList
     private val repository = Repository()
 
