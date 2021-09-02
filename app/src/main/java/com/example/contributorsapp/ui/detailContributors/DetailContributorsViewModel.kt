@@ -1,5 +1,6 @@
 package com.example.contributorsapp.ui.detailContributors
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,8 +9,9 @@ import com.example.contributorsapp.model.Repository
 import kotlinx.coroutines.launch
 
 class DetailContributorsViewModel : ViewModel() {
-    var detail: MutableLiveData<DetailData> =
-        MutableLiveData(DetailData(0, "null", "null", "null", "null", 0, 0, 0, ""))
+    private val _detail: MutableLiveData<DetailData> =
+        MutableLiveData()
+    val detail: LiveData<DetailData> = _detail
     private val repository = Repository()
     private var login = ""
 
@@ -19,7 +21,7 @@ class DetailContributorsViewModel : ViewModel() {
 
     fun fetchDetail() {
         viewModelScope.launch {
-            detail.postValue(repository.fetchUserDetail(login))
+            _detail.postValue(repository.fetchUserDetail(login))
         }
     }
 
